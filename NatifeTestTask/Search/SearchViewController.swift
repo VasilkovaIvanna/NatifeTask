@@ -35,7 +35,6 @@ class SearchViewController: UIViewController, SearchViewProtocol {
     private func setupCustomBarButton(iconName: String, selector: Selector, left: Bool) -> UIBarButtonItem {
         let menuBtn = UIButton(type: .custom)
         let backBtnImage = UIImage(named: iconName)
-        let imageSize = backBtnImage?.size ?? .zero
         menuBtn.setImage(backBtnImage, for: .normal)
         menuBtn.frame = CGRect(x: 0, y: 0, width: 22, height: 22)
         

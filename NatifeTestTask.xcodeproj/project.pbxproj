@@ -31,6 +31,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CA08701428D0A175006604F9 /* Swinject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Swinject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA2D796728CFE6810030FFD7 /* HourlyForecastViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyForecastViewModel.swift; sourceTree = "<group>"; };
 		CA2D796928CFE68F0030FFD7 /* DailyForecastViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyForecastViewModel.swift; sourceTree = "<group>"; };
 		CA2D796C28CFEB2D0030FFD7 /* WeatherViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewModel.swift; sourceTree = "<group>"; };
@@ -38,7 +39,7 @@
 		CA2D797228D076E50030FFD7 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		CA87D9FA28CF524300AD9ABB /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		CAA41DC328CFD5CC009BDC8F /* WeatherViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
-		CAC2B27328CCF93E003E9573 /* NafiveTestTask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NafiveTestTask.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CAC2B27328CCF93E003E9573 /* NatifeTestTask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NatifeTestTask.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAC2B27628CCF93E003E9573 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CAC2B27828CCF93E003E9573 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		CAC2B27D28CCF93E003E9573 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -67,6 +68,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CA08701328D0A175006604F9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CA08701428D0A175006604F9 /* Swinject.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		CA2D796B28CFEB100030FFD7 /* Weather */ = {
 			isa = PBXGroup;
 			children = (
@@ -97,20 +106,21 @@
 		CAC2B26A28CCF93E003E9573 = {
 			isa = PBXGroup;
 			children = (
-				CAC2B27528CCF93E003E9573 /* NafiveTestTask */,
+				CAC2B27528CCF93E003E9573 /* NatifeTestTask */,
 				CAC2B27428CCF93E003E9573 /* Products */,
+				CA08701328D0A175006604F9 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
 		CAC2B27428CCF93E003E9573 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				CAC2B27328CCF93E003E9573 /* NafiveTestTask.app */,
+				CAC2B27328CCF93E003E9573 /* NatifeTestTask.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		CAC2B27528CCF93E003E9573 /* NafiveTestTask */ = {
+		CAC2B27528CCF93E003E9573 /* NatifeTestTask */ = {
 			isa = PBXGroup;
 			children = (
 				CAC2B27628CCF93E003E9573 /* AppDelegate.swift */,
@@ -127,7 +137,7 @@
 				CAC2B27F28CCF940003E9573 /* Assets.xcassets */,
 				CAC2B28428CCF940003E9573 /* Info.plist */,
 			);
-			path = NafiveTestTask;
+			path = NatifeTestTask;
 			sourceTree = "<group>";
 		};
 		CAC2B28A28CD0465003E9573 /* API */ = {
@@ -163,9 +173,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		CAC2B27228CCF93E003E9573 /* NafiveTestTask */ = {
+		CAC2B27228CCF93E003E9573 /* NatifeTestTask */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = CAC2B28728CCF940003E9573 /* Build configuration list for PBXNativeTarget "NafiveTestTask" */;
+			buildConfigurationList = CAC2B28728CCF940003E9573 /* Build configuration list for PBXNativeTarget "NatifeTestTask" */;
 			buildPhases = (
 				CAC2B26F28CCF93E003E9573 /* Sources */,
 				CAC2B27028CCF93E003E9573 /* Frameworks */,
@@ -175,9 +185,9 @@
 			);
 			dependencies = (
 			);
-			name = NafiveTestTask;
+			name = NatifeTestTask;
 			productName = NafiveTestTask;
-			productReference = CAC2B27328CCF93E003E9573 /* NafiveTestTask.app */;
+			productReference = CAC2B27328CCF93E003E9573 /* NatifeTestTask.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -195,7 +205,7 @@
 					};
 				};
 			};
-			buildConfigurationList = CAC2B26E28CCF93E003E9573 /* Build configuration list for PBXProject "NafiveTestTask" */;
+			buildConfigurationList = CAC2B26E28CCF93E003E9573 /* Build configuration list for PBXProject "NatifeTestTask" */;
 			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -208,7 +218,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				CAC2B27228CCF93E003E9573 /* NafiveTestTask */,
+				CAC2B27228CCF93E003E9573 /* NatifeTestTask */,
 			);
 		};
 /* End PBXProject section */
@@ -401,7 +411,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = QF5DP4K689;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = NafiveTestTask/Info.plist;
+				INFOPLIST_FILE = NatifeTestTask/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -429,7 +439,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = QF5DP4K689;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = NafiveTestTask/Info.plist;
+				INFOPLIST_FILE = NatifeTestTask/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -451,7 +461,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		CAC2B26E28CCF93E003E9573 /* Build configuration list for PBXProject "NafiveTestTask" */ = {
+		CAC2B26E28CCF93E003E9573 /* Build configuration list for PBXProject "NatifeTestTask" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				CAC2B28528CCF940003E9573 /* Debug */,
@@ -460,7 +470,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		CAC2B28728CCF940003E9573 /* Build configuration list for PBXNativeTarget "NafiveTestTask" */ = {
+		CAC2B28728CCF940003E9573 /* Build configuration list for PBXNativeTarget "NatifeTestTask" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				CAC2B28828CCF940003E9573 /* Debug */,

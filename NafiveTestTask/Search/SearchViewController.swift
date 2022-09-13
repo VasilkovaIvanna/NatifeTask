@@ -1,20 +1,25 @@
 import UIKit
-import MapKit
 
-
-class SearchViewController: UIViewController {
+class SearchViewController: UIViewController, SearchViewProtocol {
+    
+    func update() {
+        DispatchQueue.main.async {
+            if self.viewModel.model.selectedPlace != nil {
+                self.navigationController?.popViewController(animated: true)
+            }
+            self.tableView.reloadData()
+        }
+    }
     
     @IBOutlet weak var searchView: UISearchBar!
     
     @IBOutlet weak var tableView: UITableView!
     
-    weak var viewController: ViewController?
-        
-    var places : [String] = []
-    let completer = MKLocalSearchCompleter()
+    var viewModel = SearchViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        overrideUserInterfaceStyle = .light
         searchView.searchTextField.leftView = nil
         searchView.searchTextField.backgroundColor = .white
         navigationItem.titleView = searchView
@@ -22,9 +27,9 @@ class SearchViewController: UIViewController {
         navigationItem.leftBarButtonItem = setupCustomBarButton(iconName: "ic_back", selector: #selector(backButtonTapped), left: true)
         navigationItem.rightBarButtonItem = setupCustomBarButton(iconName: "ic_search", selector: #selector(searchButtonTapped), left: false)
         
-        completer.delegate = self
         tableView.delegate = self
         searchView.delegate = self
+        viewModel.delegate = self
     }
     
     private func setupCustomBarButton(iconName: String, selector: Selector, left: Bool) -> UIBarButtonItem {
@@ -33,7 +38,7 @@ class SearchViewController: UIViewController {
         let imageSize = backBtnImage?.size ?? .zero
         menuBtn.setBackgroundImage(backBtnImage, for: .normal)
         menuBtn.frame = CGRect(x: 0, y: 0, width: imageSize.width, height: imageSize.height)
-
+        
         let view = UIView(frame: menuBtn.frame)
         menuBtn.addTarget(self, action: selector, for: .touchUpInside)
         view.bounds = view.bounds.offsetBy(dx: left ? 5 : -5, dy: 0)
@@ -55,41 +60,25 @@ extension SearchViewController : UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return places.count
+        return viewModel.model.places.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        cell.textLabel?.text = places[indexPath.row]
+        cell.textLabel?.text = viewModel.model.places[indexPath.row]
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let locationName = places[indexPath.row]
-        let request = MKLocalSearch.Request()
-        request.naturalLanguageQuery = locationName
-        let search = MKLocalSearch(request: request)
-        search.start { [weak self] (response, error) in
-            // open this coordinate
-            if let coordinate = response?.mapItems.first?.placemark.coordinate {
-                self?.viewController?.setupLocation(locationCoordinate: coordinate)
-                self?.navigationController?.popViewController(animated: true)
-            }
-        }
+        self.view.endEditing(true)
+        viewModel.selectItem(row: indexPath.row)
     }
 }
 
 extension SearchViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        completer.queryFragment = searchText
+        viewModel.search(searchText: searchText)
     }
 }
 
-extension SearchViewController: MKLocalSearchCompleterDelegate {
-    func completerDidUpdateResults(_ completer: MKLocalSearchCompleter) {
-        DispatchQueue.main.async {
-            self.places = completer.results.map({$0.title})
-            self.tableView.reloadData()
-        }
-    }
-}
+

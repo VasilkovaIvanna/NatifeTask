@@ -1,10 +1,3 @@
-//
-//  CollectionViewCell.swift
-//  NafiveTestTask
-//
-//  Created by Ivy on 11.09.2022.
-//
-
 import UIKit
 
 class HourlyCollectionViewCell: UICollectionViewCell {

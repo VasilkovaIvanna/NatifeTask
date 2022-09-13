@@ -1,10 +1,3 @@
-//
-//  DailyTableViewCell.swift
-//  NafiveTestTask
-//
-//  Created by Ivy on 11.09.2022.
-//
-
 import UIKit
 
 class DailyTableViewCell: UITableViewCell {
@@ -31,9 +24,5 @@ class DailyTableViewCell: UITableViewCell {
         tempLabel.textColor = selected ? .backgroundBlue : .black
         
         weatherIconView.tintColor = selected ? .backgroundBlue : .black
-        
-        
     }
-
-    
 }

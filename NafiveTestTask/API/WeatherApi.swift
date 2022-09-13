@@ -19,7 +19,10 @@ class WeatherApi {
         }
     }
     
-    private func sendRequest(command: WeatherCommand, latitude: Double, longitude: Double, completionHandler: @escaping (Data)->()) {
+    private func sendRequest(command: WeatherCommand,
+                             latitude: Double,
+                             longitude: Double,
+                             completionHandler: @escaping (Data)->()) {
         
         if var urlComponents =  URLComponents(string: "https://api.openweathermap.org/data/\(command.version)/\(command.rawValue)") {
             
@@ -35,7 +38,6 @@ class WeatherApi {
                 URLSession.shared.dataTask(with: url) { data, response, error in
                     guard let data = data else { return }
                     completionHandler(data)
-                    
                 }.resume()
             }
         } else {

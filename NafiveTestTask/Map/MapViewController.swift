@@ -1,38 +1,48 @@
 import UIKit
 import MapKit
-import CoreLocation
 
-class MapViewController: UIViewController {
+class MapViewController: UIViewController, MapViewProtocol {
     
-    
-    @IBOutlet weak var mapView: MKMapView!
-    
-    weak var viewController: ViewController?
-    
-    var currentLocation : CLLocation?
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        if let currentLocation = currentLocation {
-            mapView.centerToLocation(currentLocation)
+    var viewModel = MapViewModel() {
+        didSet {
+            viewModel.delegate = self
         }
     }
     
+    @IBOutlet weak var mapView: MKMapView!
     
-
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        overrideUserInterfaceStyle = .light
+    }
     
-    func showMapAlert(locationName: String, locationCoordinate: CLLocationCoordinate2D){
-        let alert = UIAlertController(title: "Change the place to \(locationName)",
+    func updateCurrentLocation() {
+        if let currentLocation = viewModel.model.currentLocation { mapView.centerToLocation(currentLocation)
+        }
+    }
+    
+    func update() {
+        if viewModel.didSelectLocation {
+            showMapAlert()
+        } else {
+            updateCurrentLocation()
+        }
+    }
+    
+    func showMapAlert() {
+        let alert = UIAlertController(title: "Change the place to \(viewModel.model.locationName ?? "the selected location")",
                                       message: "Would you like to see the forecast for the selected location?",
                                       preferredStyle: UIAlertController.Style.alert)
         
-        let okAction = UIAlertAction(title: "Show forecast", style: UIAlertAction.Style.default, handler: { action in
-            
-            self.viewController?.updateCurrentLocation(newLocation: locationCoordinate)
-            self.dismiss(animated: true)
-            
+        let okAction = UIAlertAction(title: "Show forecast", style: UIAlertAction.Style.default, handler: { _ in
+            self.viewModel.showForecast()
+            self.navigationController?.popViewController(animated: true)
         })
-        let cancelAction = UIAlertAction(title: "Stay on the map", style: .cancel)
+        
+        let cancelAction = UIAlertAction(title: "Stay on the map", style: .cancel) {
+            _ in
+            self.viewModel.resetSelectedLocation()
+        }
         
         alert.addAction(okAction)
         alert.addAction(cancelAction)
@@ -40,20 +50,13 @@ class MapViewController: UIViewController {
         present(alert, animated: true, completion: nil)
     }
     
-    
-    
+
     @IBAction func onLongPress(_ sender: UILongPressGestureRecognizer) {
         guard sender.state == .began else { return }
         let touchLocation = sender.location(in: mapView)
         let locationCoordinate = mapView.convert(touchLocation, toCoordinateFrom: mapView)
-        CLGeocoder().reverseGeocodeLocation(CLLocation(latitude: locationCoordinate.latitude, longitude: locationCoordinate.longitude)) { [weak self] places, error in
-            if let city = places?.first?.locality {
-                self?.showMapAlert(locationName: city, locationCoordinate: locationCoordinate)
-            }
-        }
+        viewModel.nameForLocation(locationCoordinate: locationCoordinate)
     }
-    
-    
 }
 
 private extension MKMapView {

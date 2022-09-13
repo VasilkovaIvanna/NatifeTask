@@ -1,10 +1,3 @@
-//
-//  SceneDelegate.swift
-//  NafiveTestTask
-//
-//  Created by Ivy on 10.09.2022.
-//
-
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {

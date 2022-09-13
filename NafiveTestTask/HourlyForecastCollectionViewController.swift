@@ -2,40 +2,43 @@ import UIKit
 
 private let reuseIdentifier = "Cell"
 
-class HourlyForecastCollectionViewController: UICollectionViewController {
+class HourlyForecastCollectionViewController: UICollectionViewController, HourlyForecastProtocol {
     
-    var hourlyForecast : [HourlyForecastResponse] = [] {
+    var viewModel = HourlyForecastViewModel() {
         didSet {
-            DispatchQueue.main.async {
-                self.collectionView.reloadData()
-            }
+            viewModel.delegate = self
+            overrideUserInterfaceStyle = .light
         }
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel.delegate = self
     }
-
+    
+    func update() {
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
+        }
+    }
+    
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
-
+    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return hourlyForecast.count
+        return viewModel.hourlyForecast.count
     }
-
+    
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! HourlyCollectionViewCell
         
-        let forecast = hourlyForecast[indexPath.row]
+        let info = viewModel.formatData(row: indexPath.row)
         
-        let df = DateFormatter()
-        df.locale = Locale(identifier: "en_ua")
-        df.dateFormat = "HH"
-        cell.hourlLabel.text = df.string(from: Date(timeIntervalSince1970: TimeInterval(forecast.dt ?? 0)))
-        cell.weatherImage.image = UIImage(named: forecast.weather.first?.imageNameByIcon ?? "")
-        cell.tempLabel.text = "\(Int(forecast.temp ?? 0))°"
-    
+        cell.hourlLabel.text = info.hour
+        cell.weatherImage.image = UIImage(named: info.imageName)
+        cell.tempLabel.text = info.temp
+        
         return cell
     }
 }
